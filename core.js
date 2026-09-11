@@ -253,7 +253,7 @@ export function buildReport(store, month, { reservations, aiLog, pushLog, priceI
   const tout = aiLog.reduce((n, a) => n + (a.tokens_out || 0), 0);
   const usd = (tin * priceIn + tout * priceOut) / 1e6;
   const pushOk = pushLog.filter(p => p.ok);
-  const pushBy = count(pushOk, p => p.kind);
+  const pushBy = count(pushOk, p => ({ store_notice: '店への通知', reminder: '前日のお知らせ' }[p.kind] || p.kind));
   const fmt = obj => Object.entries(obj).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k} ${v}件`).join(' / ') || 'なし';
   const [y, m] = month.split('-');
   return [
