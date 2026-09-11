@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>予約LINEの体験ページ（架空の美容室）</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:"Hiragino Sans","Noto Sans JP",sans-serif;background:#eef2ee;color:#1d2b24}
+.notice{background:#fff7d6;border-bottom:1px solid #e6d9a4;padding:10px 16px;font-size:13px;line-height:1.6}
+.wrap{display:flex;gap:20px;justify-content:center;align-items:flex-start;padding:20px;flex-wrap:wrap}
+.phone{width:380px;max-width:100%;height:720px;background:#7494c0;border-radius:24px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 30px #0002}
+.bar{background:#273246;color:#fff;padding:14px 16px;font-weight:700;font-size:15px}
+.log{flex:1;overflow-y:auto;padding:14px 10px;display:flex;flex-direction:column;gap:10px}
+.row{display:flex}
+.row.me{justify-content:flex-end}
+.b{max-width:78%;padding:9px 12px;border-radius:16px;font-size:14px;line-height:1.55;white-space:pre-wrap;word-break:break-word}
+.bot .b{background:#fff;border-top-left-radius:4px}
+.me .b{background:#8de055;border-top-right-radius:4px}
+.quick{display:flex;gap:6px;overflow-x:auto;padding:8px 10px;background:#7494c0;min-height:48px}
+.quick button{flex:none;border:1px solid #fff;background:#ffffffee;color:#1c7a3d;border-radius:18px;padding:7px 12px;font-size:13px;font-weight:700;cursor:pointer}
+form{display:flex;gap:6px;padding:8px;background:#fff}
+form input{flex:1;border:1px solid #ccd;border-radius:18px;padding:9px 12px;font-size:14px}
+form button{border:0;background:#06c755;color:#fff;border-radius:18px;padding:0 14px;font-weight:700}
+.side{width:380px;max-width:100%}
+.card{background:#fff;border-radius:14px;padding:14px 16px;margin-bottom:14px;box-shadow:0 4px 14px #0001}
+.card h2{font-size:15px;margin:0 0 8px}
+.card p,.card li{font-size:13px;line-height:1.6}
+.card ul{margin:0;padding-left:18px}
+.samples button{margin:3px 4px 3px 0;border:1px solid #9bb8a6;background:#f3f8f4;border-radius:14px;padding:5px 10px;font-size:12px;cursor:pointer}
+table{width:100%;border-collapse:collapse;font-size:12px}
+td,th{border-bottom:1px solid #e3e9e4;padding:5px 4px;text-align:left}
+.notes div{background:#f5f7f4;border-left:4px solid #06c755;padding:6px 8px;margin-bottom:6px;font-size:12px;white-space:pre-wrap}
+.reset{border:1px solid #bbb;background:#fff;border-radius:8px;padding:6px 10px;font-size:12px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="notice">
+これは<b>架空の美容室</b>の予約LINEを、ブラウザで再現した体験ページです。本物のLINEではなく、入力した内容はどこにも送られません（ページを閉じると消えます）。<br>
+予約の受付・空き枠・取り消しは、実際に配る制作ファイルと同じ会話の処理で動いています。<b>質問への回答は、このページではAIを呼ばず</b>、手元の実測でAIが返した文をそのまま再生します。登録していない質問は「お店に回す」扱いになります。
+</div>
+<div class="wrap">
+  <div class="phone">
+    <div class="bar" id="shop">予約LINE</div>
+    <div class="log" id="log"></div>
+    <div class="quick" id="quick"></div>
+    <form id="form"><input id="input" placeholder="メッセージを入力" autocomplete="off"><button>送信</button></form>
+  </div>
+  <div class="side">
+    <div class="card samples">
+      <h2>質問の例（実測でAIが返した文を再生）</h2>
+      <div id="samples"></div>
+    </div>
+    <div class="card">
+      <h2>お店側に見えるもの：予約一覧</h2>
+      <table id="table"></table>
+    </div>
+    <div class="card notes">
+      <h2>お店側に見えるもの：店主のLINEに届く通知</h2>
+      <div id="notes"><p>まだありません</p></div>
+    </div>
+    <div class="card">
+      <p>予約の一部は、最初から「他のお客さま」の予約として埋めてあります。空いている時間だけがボタンに出ます。</p>
+      <button class="reset" id="reset">最初からやり直す</button>
+    </div>
+  </div>
+</div>
+<script type="module" src="./app.js"></script>
+</body>
+</html>
